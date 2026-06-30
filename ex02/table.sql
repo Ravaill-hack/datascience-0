@@ -1,11 +1,17 @@
+DROP TABLE IF EXISTS data_2022_oct;
+
 CREATE TABLE data_2022_oct (
-    event_time DATETIME PRIMARY KEY,
-    event_type VARCHAR(4),
+    event_time TIMESTAMP,
+    event_type VARCHAR,
     product_id INT,
     price NUMERIC(10, 2),
-    user_id BIGINT,
-    user_session UUID
-)
+    user_id INT,
+    user_session UUID,
+    id BIGSERIAL PRIMARY KEY
+);
 
-
+COPY data_2022_oct (event_time, event_type, product_id, price, user_id, user_session)
+FROM '/data/data_2022_oct.csv'
+DELIMITER ','
+CSV HEADER;
 
